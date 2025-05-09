@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tra cứu dữ liệu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: sans-serif; padding: 1rem; max-width: 600px; margin: auto; }
+    input {
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      width: 100%;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      word-break: break-word;
+      vertical-align: top;
+    }
+    @media (max-width: 600px) {
+      td { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <h2>Tra cứu theo: Số chứng minh</h2>
+  <input type="text" id="search-input" placeholder="Nhập từ khóa để tra cứu...">
+  <div id="result"></div>
+
+  <script>
+    const data = [{"LỚP":"55B2K15","Họ và tên":"KHUẤT VĂN BA","Ngày sinh":"15.07.1995","Giới tính":"Nam","Số chứng minh":"001095030820","Số giờ vi phạm đã trừ":0,"Số km vi phạm đã trừ":0,"GIỜ  theo biển số KH":16.93,"KM theo biển số KH ":660.23,"GIỜ tự động":3.81,"KM tự động":168.29,"TỔNG GIỜ":20.74,"TỔNG KM ":828.52,"ĐạtTD":"ĐạtTD","GIỜ ĐÊM":3.28,"km ĐÊM":123.39,"Đạt đêm":"Đạt đêm","LT":"x","Sổ":0,"Cabin":0,"học phí":0},{"LỚP":"55B2K15","Họ và tên":"TÔ ĐÌNH CẢNH","Ngày sinh":"20.07.1983","Giới tính":"Nam","Số chứng minh":"001083041571","Số giờ vi phạm đã trừ":0.02,"Số km vi phạm đã trừ":0.13,"GIỜ  theo biển số KH":17.71,"KM theo biển số KH ":674.1000000000001,"GIỜ tự động":3.27,"KM tự động":144.51,"TỔNG GIỜ":20.98,"TỔNG KM ":818.61,"ĐạtTD":"ĐạtTD","GIỜ ĐÊM":3.22,"km ĐÊM":75.14,"Đạt đêm":"Đạt đêm","LT":"x","Sổ":0,"Cabin":"x","học phí":0},{"LỚP":"55B2K15","Họ và tên":"TRẦN QUANG VINH","Ngày sinh":"01.05.2005","Giới tính":"Nam","Số chứng minh":"001205054005","Số giờ vi phạm đã trừ":0,"Số km vi phạm đã trừ":0,"GIỜ  theo biển số KH":19.44,"KM theo biển số KH ":668.1099999999999,"GIỜ tự động":3.38,"KM tự động":165.18,"TỔNG GIỜ":22.82,"TỔNG KM ":833.29,"ĐạtTD":"ĐạtTD","GIỜ ĐÊM":3.11,"km ĐÊM":91.66,"Đạt đêm":"Đạt đêm","LT":"x","Sổ":"x","Cabin":"X","học phí":0},{"LỚP":"55B2K16","Họ và tên":"BÙI THẾ ANH","Ngày sinh":"20.07.2001","Giới tính":"Nam","Số chứng minh":"001201024767","Số giờ vi phạm đã trừ":0,"Số km vi phạm đã trừ":0,"GIỜ  theo biển số KH":17.72,"KM theo biển số KH ":727.9499999999999,"GIỜ tự động":3.35,"KM tự động":82.11,"TỔNG GIỜ":21.07,"TỔNG KM ":810.06,"ĐạtTD":"ĐạtTD","ĐẠT GIỜ":"Đạt giờ","GIỜ ĐÊM":5.15,"km ĐÊM":151.71,"Đạt đêm":"Đạt đêm","DAT":"ĐỦ DAT","LT":"x","Sổ":"x","Cabin":0,"học phí":"X"},{"LỚP":"55B2K16","Họ và tên":"HOÀNG MẠNH HIẾU","Ngày sinh":"20.04.1983","Giới tính":"Nam","Số chứng minh":"001083016176","Số giờ vi phạm đã trừ":0,"Số km vi phạm đã trừ":0,"GIỜ  theo biển số KH":11.49,"KM theo biển số KH ":437.99,"GIỜ tự động":0,"KM tự động":0,"TỔNG GIỜ":11.49,"TỔNG KM ":437.99,"GIỜ ĐÊM":0,"km ĐÊM":0,"LT":"x","Sổ":0,"Cabin":0,"học phí":0},{"LỚP":"55B2K16","Họ và tên":"ĐINH DUY KHÁNH","Ngày sinh":"23.01.2006","Giới tính":"Nam","Số chứng minh":"001206080638","Số giờ vi phạm đã trừ":0.1,"Số km vi phạm đã trừ":0.43,"GIỜ  theo biển số KH":5.74,"KM theo biển số KH ":248.45,"GIỜ tự động":0,"KM tự động":0,"TỔNG GIỜ":5.74,"TỔNG KM ":248.45,"GIỜ ĐÊM":0,"km ĐÊM":0,"LT":"x","Sổ":0,"Cabin":0,"học phí":0},{"LỚP":"55B2K17","Họ và tên":"TRẦN QUANG HÃNH","Ngày sinh":"26.07.1996","Giới tính":"Nam","Số chứng minh":"036096021419","Số giờ vi phạm đã trừ":0,"Số km vi phạm đã trừ":0,"GIỜ  theo biển số KH":0,"KM theo biển số KH ":0,"GIỜ tự động":0,"KM tự động":0,"TỔNG GIỜ":0,"TỔNG KM ":0,"GIỜ ĐÊM":0,"km ĐÊM":0,"LT":"x","Sổ":0,"Cabin":0,"học phí":0},{"LỚP":"55B2K17","Họ và tên":"BÙI VIỆT HÙNG","Ngày sinh":"26.11.2004","Giới tính":"Nam","Số chứng minh":"037204001482","Số giờ vi phạm đã trừ":0,"Số km vi phạm đã trừ":0,"GIỜ  theo biển số KH":0,"KM theo biển số KH ":0,"GIỜ tự động":0,"KM tự động":0,"TỔNG GIỜ":0,"TỔNG KM ":0,"GIỜ ĐÊM":0,"km ĐÊM":0,"LT":0,"Sổ":0,"Cabin":0,"học phí":0},{"LỚP":"55B2K17","Họ và tên":"VŨ ĐỨC LÂM","Ngày sinh":"15.02.2004","Giới tính":"Nam","Số chứng minh":"001204028384","Số giờ vi phạm đã trừ":0,"Số km vi phạm đã trừ":0,"GIỜ  theo biển số KH":17.009999999999998,"KM theo biển số KH ":724.72,"GIỜ tự động":3.34,"KM tự động":91.17,"TỔNG GIỜ":20.35,"TỔNG KM ":815.89,"ĐạtTD":"ĐạtTD","ĐẠT GIỜ":"Đạt giờ","GIỜ ĐÊM":5.83,"km ĐÊM":221.82,"Đạt đêm":"Đạt đêm","DAT":"ĐỦ DAT","LT":"x","Sổ":"x","Cabin":0,"học phí":0},{"LỚP":"55B2K17","Họ và tên":"NGUYỄN VIỆT TIẾN","Ngày sinh":"02.08.2006","Giới tính":"Nam","Số chứng minh":"001206087714","Số giờ vi phạm đã trừ":0,"Số km vi phạm đã trừ":0,"GIỜ  theo biển số KH":0,"KM theo biển số KH ":0,"GIỜ tự động":0,"KM tự động":0,"TỔNG GIỜ":0,"TỔNG KM ":0,"GIỜ ĐÊM":0,"km ĐÊM":0,"LT":0,"Sổ":0,"Cabin":0,"học phí":0},{"LỚP":"55B2K18","Họ và tên":"ĐÀO QUANG HUY","Ngày sinh":"26.11.2002","Giới tính":"Nam","Số chứng minh":"001202020586","Số giờ vi phạm đã trừ":0,"Số km vi phạm đã trừ":0,"GIỜ  theo biển số KH":18.240000000000002,"KM theo biển số KH ":702.02,"GIỜ tự động":3.59,"KM tự động":189.1,"TỔNG GIỜ":21.83,"TỔNG KM ":891.12,"ĐạtTD":"ĐạtTD","ĐẠT GIỜ":"Đạt giờ","GIỜ ĐÊM":8.72,"km ĐÊM":353.41,"Đạt đêm":"Đạt đêm","DAT":"ĐỦ DAT","LT":"x","Sổ":0,"Cabin":"X","học phí":0},{"LỚP":"55B2K18","Họ và tên":"PHÙNG ĐỨC KHIÊM","Ngày sinh":"07.11.2006","Giới tính":"Nam","Số chứng minh":"001206028838","Số giờ vi phạm đã trừ":0,"Số km vi phạm đã trừ":0,"GIỜ  theo biển số KH":0,"KM theo biển số KH ":0,"GIỜ tự động":0,"KM tự động":0,"TỔNG GIỜ":0,"TỔNG KM ":0,"GIỜ ĐÊM":0,"km ĐÊM":0,"LT":0,"Sổ":0,"Cabin":0,"học phí":0},{"Số giờ vi phạm đã trừ":0,"Số km vi phạm đã trừ":0,"GIỜ  theo biển số KH":4.359999999999999,"KM theo biển số KH ":203.67000000000002,"GIỜ tự động":0,"KM tự động":0,"TỔNG GIỜ":4.36,"TỔNG KM ":203.67,"GIỜ ĐÊM":0,"km ĐÊM":0,"LT":"X","Sổ":0,"Cabin":"X","học phí":0},{"LT":"X","Sổ":0,"Cabin":0,"học phí":0}];
+    const field = "Số chứng minh";
+
+    document.getElementById('result').innerHTML = '';
+    document.getElementById('search-input').addEventListener('input', function () {
+      const value = this.value.trim().toLowerCase();
+      const match = data.find(row => row[field]?.toString().toLowerCase().includes(value));
+      displayResult(match);
+    });
+
+    function displayResult(row) {
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = '';
+      if (!row) return;
+
+      const entries = Object.entries(row);
+      const table = document.createElement('table');
+
+      for (let i = 0; i < entries.length; i += 5) {
+        const tr = document.createElement('tr');
+        for (let j = i; j < i + 5 && j < entries.length; j++) {
+          const [key, val] = entries[j];
+          const td = document.createElement('td');
+          td.innerHTML = '<strong>' + key + ':</strong><br>' + val;
+          tr.appendChild(td);
+        }
+        table.appendChild(tr);
+      }
+
+      resultDiv.appendChild(table);
+    }
+  </script>
+</body>
+</html>
